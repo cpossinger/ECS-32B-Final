@@ -20,13 +20,14 @@ class Truck:
 
     def collectPackage(self, pk):
         if self.storage > 20:
-            Package.collected = True
             return
         elif pk.address in self.packages:
-            self.packages[pk.address].append([pk.id])
+            self.packages[pk.address].append(pk.id)
+            pk.collected = True
             self.storage += 1
         else:
             self.packages[pk.address] = [pk.id]
+            pk.collected = True
             self.storage += 1
 
 
