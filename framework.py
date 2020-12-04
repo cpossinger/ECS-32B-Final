@@ -19,7 +19,7 @@ class Truck:
 
 
     def collectPackage(self, pk):
-        f self.storage > 20:
+        if self.storage > 20:
             Package.collected = True
             return
         elif pk.address in self.packages:
