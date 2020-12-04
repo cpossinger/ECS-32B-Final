@@ -19,6 +19,7 @@ class Truck:
 
 
     def collectPackage(self, pk):
+        # an issue I need to fix here is the case in which we are loading less than 20 packages in total but I'll fix it by tonight
                 while self.storage <= 20:
             if pk.address in self.packages:
                 self.packages[pk.address].append(pk.id)
