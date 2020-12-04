@@ -15,9 +15,18 @@ class Truck:
         self.size = n
         self.location = loc
         self.packages = dict()
+        self.storage = len(self.packages)
 
 
     def collectPackage(self, pk):
+                while self.storage <= 20:
+            if pk.address in self.packages:
+                self.packages[pk.address].append(pk.id)
+                self.storage += 1
+            else:
+                self.packages[pk.address] = [pk.id]
+                self.storage += 1
+        Package.collected = True
 
 
     def deliverPackage(self, pk):
