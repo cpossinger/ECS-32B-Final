@@ -32,6 +32,15 @@ class Truck:
 
 
     def deliverPackage(self, pk):
+        if self.storage == 0:
+            return
+        for pk in self.packages:
+            if len(self.packages[pk.address]) == 1:
+                pk.delivered = True
+                del self.packages[pk.address]
+            else:
+                pk.delivered = True
+                del self.packages[pk.address[pk.id]]
 
 
     def deliverPackageByAddress(self, addr):
