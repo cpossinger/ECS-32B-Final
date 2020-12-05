@@ -46,28 +46,34 @@ class Truck:
     def deliverPackageByAddress(self, addr):
         pk_w_input_addy = self.packages[addr].values()
         for package in  pk_w_input_addy:
-            deliverPackage(self,package)
+            self.deliverPackage(self,package)
         return
 
     def removePackage(self, pk, office):
         pk_2_remove = self.packages[pk.address].pop(pk.id)
-        driveTo(self,self.location,office)
+        self.driveTo(self,self.location,office)
         pk_2_remove.office = office
         pk_2_remove.collected = False
         return
 
-
-
-
-
-
-
-
-
     def driveTo(self, loc1, loc2):
-
+        if loc1 != self.location:
+            self.driveTo(self.location, loc1)
+        self.location = loc2
 
     def getPackagesIds(self):
+        packID = []
+        adds = list(self.packages.values()) #list of dictionaries of id->package
+        if adds == []:
+            return packID
+        for i in range(len(adds)):
+            p = list(adds.values()) #list of packages at a given location
+            if p == []: #check if address is empty
+                continue
+            else:
+                for k in range(len(p)):
+                    packID.append(p[k])
+        return packID
 
 
 
