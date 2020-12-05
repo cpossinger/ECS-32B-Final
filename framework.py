@@ -44,21 +44,24 @@ class Truck:
 
 
     def deliverPackageByAddress(self, addr):
+        self.driveTo(self.location,addr)
         pk_w_input_addy = self.packages[addr].values()
-        for package in  pk_w_input_addy:
-            deliverPackage(self,package)
+        for package in pk_w_input_addy:
+            self.storage -= 1
+            self.deliverPackage(package)
         return
 
     def removePackage(self, pk, office):
+        self.driveTo(self.location,office)
         pk_2_remove = self.packages[pk.address].pop(pk.id)
-        driveTo(self,self.location,office)
+        self.storage -= 1
         pk_2_remove.office = office
         pk_2_remove.collected = False
         return
 
     def driveTo(self, loc1, loc2):
         if loc1 != self.location:
-            driveTo(self.location, loc1)
+            self.driveTo(self.location, loc1)
         self.location = loc2
 
     def getPackagesIds(self):
