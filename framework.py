@@ -17,30 +17,27 @@ class Truck:
         self.packages = dict()
         self.storage = len(self.packages)
 
-
     def collectPackage(self, pk):
-        if self.storage > 20:
+        if self.storage >= self.size:
             return
-        elif pk.address in self.packages:
-            self.packages[pk.address].append(pk.id)
-            pk.collected = True
+        elif pk.address in self.packages.keys():
+            self.packages[pk.address][pk.id] = pk
+            self.packages[pk.address][pk.id].collected = True
             self.storage += 1
         else:
-            self.packages[pk.address] = [pk.id]
-            pk.collected = True
+            self.packages[pk.address] = {pk.id: pk}
+            self.packages[pk.address][pk.id].collected = True
             self.storage += 1
-
 
     def deliverPackage(self, pk):
         if self.storage == 0:
             return
-        for pk in self.packages:
-            if len(self.packages[pk.address]) == 1:
-                pk.delivered = True
-                del self.packages[pk.address]
-            else:
-                pk.delivered = True
-                del self.packages[pk.address[pk.id]]
+        self.driveTo(self.location, pk.address)
+        list_of_addresses = list(self.packages.values())
+        for value in range(len(list_of_addresses)):
+            package_status = self.packages[list_of_addresses[value].pop(pk.id)]
+            package_status.delivered = True
+            self.storage -= 1
 
 
     def deliverPackageByAddress(self, addr):
