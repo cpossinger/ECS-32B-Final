@@ -33,11 +33,10 @@ class Truck:
         if self.storage == 0:
             return
         self.driveTo(self.location, pk.address)
-        list_of_addresses = list(self.packages.values())
-        for value in range(len(list_of_addresses)):
-            package_status = self.packages[list_of_addresses[value].pop(pk.id)]
-            package_status.delivered = True
-            self.storage -= 1
+        pk_2_deliver = self.packages[pk.address].pop(pk.id)
+        self.storage -= 1
+        pk_2_deliver.delivered = True
+        return
 
 
     def deliverPackageByAddress(self, addr):
