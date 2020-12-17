@@ -1,4 +1,5 @@
 from collections import defaultdict
+import sys
 
 
 
@@ -6,12 +7,14 @@ from collections import defaultdict
 BFS
 """
 def bfs(map, office):
+    print(map)
+    print(office)
     graph_dict = defaultdict(list)
     visited_dict = {}
     path_dict = defaultdict(list)
     pred_dict = {}
 
-    for u,v in map:
+    for u,v,w in map:
         graph_dict[u].append(v)
         visited_dict[u] = False
     pred_dict[office] = None
@@ -43,7 +46,7 @@ def bfs(map, office):
 
 
 
-map = [("ups","b"),("ups","c"),("b","ups"),("b","c"),("b","d"),("c","ups"),("c","b"),("c","d"),("d","b"),("d","c")]
+map = [("UPS","Brecon",3),("Jacob City","Owl Ranch",3),("Jacob City","Sunfield",15),("Sunfield","Brecon",25)i]
 print(bfs(map,"ups"))
 
 
@@ -54,9 +57,11 @@ print(bfs(map,"ups"))
 DFS
 """
 def dfs(map, office):
+    print(map)
+    print(office)
     graph_dict = defaultdict(list)
     visited_set = set()
-    for u, v in map:
+    for u, v,w in map:
         graph_dict[u].append(v)
 
     return dfsHelper(graph_dict,visited_set,office)
@@ -72,7 +77,7 @@ def dfsHelper(graph_dict,visited_set,current_stop):
            return dfsHelper(graph_dict,i,visited_set)
 
 
-map = [("ups", "b"), ("ups", "c"), ("c", "ups"), ("c", "b"), ("c", "d"), ("b", "ups"), ("b", "c"), ("b", "d"),("d", "c"), ("d", "b")]
+map = [("UPS","Brecon",3),("Jacob City","Owl Ranch",3),("Jacob City","Sunfield",15),("Sunfield","Brecon",25)]
 print(dfs(map, "ups"))
 
 
@@ -80,56 +85,23 @@ print(dfs(map, "ups"))
 Dijkstra's
 """
 def dijkstra(map, office):
+    print(map)
+    print(office)
+    graph_dict = defaultdict(list)
+    dist = {}
+    pred_dict = {}
+    dist[office] = 0
+    for u,v,w in map:
+        graph_dict[u].append(v)
+        pred_dict[u] = None
+    for i in list(graph_dict.keys())[1:]:
+        dist[i] = sys.maxsize
 
 
-def minDistance(self, dist, sptSet):
-
-        # Initilaize minimum distance for next node
-        min = sys.maxsize
-
-        # Search not nearest vertex not in the
-        # shortest path tree
-        for v in range(self.V):
-            if dist[v] < min and sptSet[v] == False:
-                min = dist[v]
-                min_index = v
-
-        return min_index
-
-        # Funtion that implements Dijkstra's single source
-        # shortest path algorithm for a graph represented
-        # using adjacency matrix representation
-
-    def dijkstra(self, src):
-
-        dist = [sys.maxsize] * self.V
-        dist[src] = 0
-        sptSet = [False] * self.V
-
-        for cout in range(self.V):
-
-            # Pick the minimum distance vertex from
-            # the set of vertices not yet processed.
-            # u is always equal to src in first iteration
-            u = self.minDistance(dist, sptSet)
-
-            # Put the minimum distance vertex in the
-            # shotest path tree
-            sptSet[u] = True
-
-            # Update dist value of the adjacent vertices
-            # of the picked vertex only if the current
-            # distance is greater than new distance and
-            # the vertex in not in the shotest path tree
-            for v in range(self.V):
-                if self.graph[u][v] > 0 and \
-                        sptSet[v] == False and \
-                        dist[v] > dist[u] + self.graph[u][v]:
-                    dist[v] = dist[u] + self.graph[u][v]
-
-        self.printSolution(dist)
 
 
-map = [("ups", "b"), ("ups", "c"), ("c", "ups"), ("c", "b"), ("c", "d"), ("b", "ups"), ("b", "c"), ("b", "d"),("d", "c"), ("d", "b")]
+
+
+map = [("UPS","Brecon",3),("Jacob City","Owl Ranch",3),("Jacob City","Sunfield",15),("Sunfield","Brecon",25)]
 print(dijkstra(map, "ups"))
 
