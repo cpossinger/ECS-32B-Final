@@ -1,7 +1,8 @@
 """
 Import your Package and Truck classes at the beginning
 """
-from project import *
+from project import Truck
+from project import Package
 
 
 
@@ -12,8 +13,8 @@ deliveryService
 def deliveryService(map, truck, packages):
     deliveredTo = {}
     stops = []
-
-    # write your code here
+    
+    myTruck = Truck()
 
     return (deliveredTo, stops)
 
