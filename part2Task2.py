@@ -1,7 +1,7 @@
 """
 Import your Package and Truck classes at the beginning
 """
-
+from project import *
 
 
 
