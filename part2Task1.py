@@ -46,7 +46,7 @@ def bfs(map, office):
 
 
 
-map = [("UPS","Brecon",3),("Jacob City","Owl Ranch",3),("Jacob City","Sunfield",15),("Sunfield","Brecon",25)i]
+map = [("UPS","Brecon",3),("Jacob City","Owl Ranch",3),("Jacob City","Sunfield",15),("Sunfield","Brecon",25)]
 print(bfs(map,"ups"))
 
 
