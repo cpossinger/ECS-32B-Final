@@ -46,13 +46,15 @@ class Truck:
 
 
     def deliverPackageByAddress(self, addr):
+        pk_ids_output = []
         if self.location == addr:
             pk_w_input_addy = self.packages[addr].keys()
             for id in list(pk_w_input_addy):
                 pk_2_deliver = self.packages[addr].pop(id)
                 self.storage -= 1
                 pk_2_deliver.delivered = True
-            return
+                pk_ids_output.append(pk_2_deliver)
+            return pk_ids_output
         else:
             return
 
